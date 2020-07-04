@@ -5,6 +5,11 @@ jobs:
       - image: node:10.21.0-alpine3.11
     steps:
       - checkout
-      - run:
-          name: Check current version of node
-          command: node -v
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm run prepush
+workflows:
+    build-and-test:
+      jobs:
+        - build-and-test
