@@ -9,7 +9,3 @@ jobs:
           steps:
             - run: npm install
             - run: npm run prepush
-workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
