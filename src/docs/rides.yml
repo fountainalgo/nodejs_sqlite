@@ -1,0 +1,229 @@
+paths:
+     /ride:
+        post:
+          summary:  Add a ride
+          description: This API is used to add a new ride.
+          tags:
+            - Ride
+          produces:
+          - application/json
+          parameters:
+          - in: body
+            schema:
+              type: object
+              properties:
+                start_lat:
+                  type: number
+                  description: Latitude coordinate of pickup point
+                start_long:
+                  type: number
+                  description: Longitude coordinate  of pickup point
+                end_lat:
+                  type: number
+                  description: Latitude coordinate of drop off point
+                end_long:
+                  type: number
+                  description: Longitude coordinate of drop off point
+                rider_name:
+                  type: string
+                  description: Name of the Rider
+                driver_name:
+                  type: string
+                  description: Name of the Driver
+                driver_vehicle:
+                  type: string
+                  description: Type of vehicle
+            name: Add a new Ride
+          responses:
+            200:
+              description: Response in case ride successfully added
+              schema:
+                type: array
+                items:
+                    type: object
+                    properties:
+                      rideId:
+                        type: number
+                        description: Unique identifier of the ride
+                      startLat:
+                        type: number
+                        description: Latitude coordinate of pickup point
+                      startLong:
+                        type: number
+                        description: Longitude coordinate  of pickup point
+                      endLat:
+                        type: number
+                        description: Latitude coordinate of drop off point
+                      endLong:
+                        type: number
+                        description: Longitude coordinate of drop off point
+                      riderName:
+                        type: string
+                        description: Name of the Rider
+                      driverName:
+                        type: string
+                        description: Name of the Driver
+                      driverVehicle:
+                        type: string
+                        description: Type of vehicle
+                      created:
+                        type: string
+                        description: The time when ride occured
+            400:
+               description: Validation Error
+               schema:
+                   type: object
+                   properties:
+                       error_code:
+                           type: string
+                           example : VALIDATION_ERROR
+                       message:
+                           type: string
+                           example: validate error message from server
+            500:
+               description: Internal Server Error
+               schema:
+                   type: object
+                   properties:
+                       error_code:
+                           type: string
+                           example : SERVER_ERROR
+                       message:
+                           type: string
+                           example: Internal Server Error
+     /rides:
+      get:
+        summary: List all the rides
+        description: Get All the rides
+        tags:
+          - Ride
+        produces:
+          - application/json
+        responses:
+          200:
+              description: List of rides
+              schema:
+                type: array
+                items:
+                    type: object
+                    properties:
+                      rideId:
+                        type: number
+                        description: Unique identifier of the ride
+                      startLat:
+                        type: number
+                        description: Latitude coordinate of pickup point
+                      startLong:
+                        type: number
+                        description: Longitude coordinate  of pickup point
+                      endLat:
+                        type: number
+                        description: Latitude coordinate of drop off point
+                      endLong:
+                        type: number
+                        description: Longitude coordinate of drop off point
+                      riderName:
+                        type: string
+                        description: Name of the Rider
+                      driverName:
+                        type: string
+                        description: Name of the Driver
+                      driverVehicle:
+                        type: string
+                        description: Type of vehicle
+                      created:
+                        type: string
+                        description: The time when ride occured
+          404:
+               description: No record found
+               schema:
+                   type: object
+                   properties:
+                       error_code:
+                           type: string
+                           example : RIDES_NOT_FOUND_ERROR
+                       message:
+                           type: string
+                           example: Could not find any rides
+          500:
+              description: Internal Server Error
+              schema:
+                  type: object
+                  properties:
+                      error_code:
+                          type: string
+                          example : SERVER_ERROR
+                      message:
+                          type: string
+                          example: Internal Server Error
+     /rides/{id}:
+      get:
+        summary: Get Ride by id
+        description: Api to returns a specific ride. Each ride is identified by a unique id
+        tags:
+          - Ride
+        produces:
+        - application/json
+        parameters:
+          - in: path
+            name: id
+            type: integer
+            required: true
+        responses:
+          200:
+            description: Everything about a ride
+            schema:
+              type: object
+              properties:
+                rideId:
+                  type: number
+                  description: Unique identifier of the ride
+                startLat:
+                  type: number
+                  description: Latitude coordinate of pickup point
+                startLong:
+                  type: number
+                  description: Longitude coordinate  of pickup point
+                endLat:
+                  type: number
+                  description: Latitude coordinate of drop off point
+                endLong:
+                  type: number
+                  description: Longitude coordinate of drop off point
+                riderName:
+                  type: string
+                  description: Name of the Rider
+                driverName:
+                  type: string
+                  description: Name of the Driver
+                driverVehicle:
+                  type: string
+                  description: Type of vehicle
+                created:
+                  type: string
+                  description: The time when ride occured
+          404:
+              description: No record found
+              schema:
+                  type: object
+                  properties:
+                      error_code:
+                          type: string
+                          example : RIDE_NOT_FOUND_ERROR
+                      message:
+                          type: string
+                          example: Could not find this ride
+          500:
+              description: Internal Server Error
+              schema:
+                  type: object
+                  properties:
+                      error_code:
+                          type: string
+                          example : SERVER_ERROR
+                      message:
+                          type: string
+                          example: Internal Server Error
+
+     
+     

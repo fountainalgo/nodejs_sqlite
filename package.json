@@ -1,0 +1,48 @@
+{
+  "name": "backend-coding-test",
+  "version": "1.0.0",
+  "description": "A coding assessment for Xendit backend interviews",
+  "engines": {
+    "node": ">8.6 <=10"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "pretest": "eslint --ignore-path .gitignore . --fix",
+    "test": "mocha tests",
+    "test:load": "pm2 start index.js && artillery run artillery.yml && pm2 delete all",
+    "coverage": "nyc --reporter=text --reporter=html --reporter=json-summary mocha tests",
+    "prepush": "npm run test && npm run coverage"
+  },
+  "keywords": [
+    "Xendit"
+  ],
+  "author": "Bo",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "pm2": "^4.4.0",
+    "sqlite3": "^4.0.6",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4",
+    "uuid-validate": "0.0.3",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chance": "^1.1.6",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "mocha": "^6.1.4",
+    "nyc": "^15.1.0",
+    "sinon": "^9.0.2",
+    "supertest": "^4.0.2",
+    "uuid": "^8.2.0"
+  }
+}

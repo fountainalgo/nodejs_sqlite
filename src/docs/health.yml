@@ -1,0 +1,12 @@
+paths:
+  /health:
+      get:
+        summary: Health check
+        description: In Response return Healthy if successful
+        tags:
+          - Monitoring
+        responses:
+          200:
+            description: Health Status
+            schema:
+              type: string

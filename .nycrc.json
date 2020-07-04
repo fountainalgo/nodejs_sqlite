@@ -1,0 +1,15 @@
+{
+  "all": false,
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "coverage",
+    "tests"
+  ],
+  "check-coverage": true,
+  "branches": 80,
+  "lines": 80,
+  "statements": 80
+}

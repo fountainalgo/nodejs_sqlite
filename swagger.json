@@ -1,0 +1,212 @@
+{
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check API",
+        "tags": [
+          "Health"
+        ],
+        "description": "API to check if the microservice is available",
+        "responses": {
+          "200": {
+            "description": "Healthy"
+          }
+        }
+      }
+    },
+    "/rides/": {
+      "get": {
+        "summary": "Api to return all the rides available in the system",
+        "tags": [
+          "Rides"
+        ],
+        "description": "Get all the Rides",
+        "responses": {
+          "200": {
+            "description": "Total rides available in the system",
+            "schema": {
+              "$ref": "#/definitions/Rides"
+            }
+          }
+        }
+      }
+    },
+    "/rides/{id}": {
+      "get": {
+        "summary": "Gets a ride by ID",
+        "tags": [
+          "Rides"
+        ],
+        "description": "Api to returns a specific ride. Each ride is identified by a numeric id",
+        "parameters":{
+            "name" :"id",
+            "in":"path",
+            "description": "Ride ID",
+            "required":true
+
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfull response . Everything about a ride",
+            "schema": {
+              "$ref": "#/definitions/Ride"
+            }
+          },
+          "400": {
+            "description": "Validation Error"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/rides": {
+      "parameters": [{
+        "name": "ride",
+        "in": "body",
+        "description": "Add a new ride in the system",
+        "schema": {
+          "$ref": "#/definitions/addRide"
+        }
+      }],
+      "post": {
+        "summary": "Adds a new ride",
+        "tags": [
+          "Rides"
+        ],
+        "description": "Create a new ride",
+        "responses": {
+          "200": {
+            "description": "A new ride has been created",
+            "schema": {
+              "$ref": "#/definitions/addRideSuccessResponseSchema"
+            }
+          },
+          "400": {
+            "description": "Validation Error"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Ride": {
+      "properties": {
+        "startLat": {
+          "type": "number",
+          "description": "Latitude position of pickup point"
+        },
+        "startLong": {
+          "type": "number",
+          "description": "Longitude position  of pickup point"
+        },
+        "endLat": {
+          "type": "number",
+          "description": "Latitude position of drop off point"
+        },
+        "endLong": {
+          "type": "number",
+          "description": "Longitude position of drop off point"
+        },
+        "riderName": {
+          "type": "string",
+          "description": "Name of the Rider"
+        },
+        "driverName": {
+          "type": "string",
+          "description": "Name of the Driver"
+        },
+        "driverVehicle": {
+          "type": "string",
+          "description": "Type of vehicle"
+        },
+        "created": {
+          "type": "string",
+          "description": "The date when ride took place"
+        }
+
+      }
+    },
+    "Rides": {
+      "type": "array",
+      "$ref": "#/definitions/Ride"
+    },
+    "addRide": {
+      "properties": {
+          "startLat": {
+            "type": "number",
+            "description": "Latitude position of pickup point"
+          },
+          "startLong": {
+            "type": "number",
+            "description": "Longitude position  of pickup point"
+          },
+          "endLat": {
+            "type": "number",
+            "description": "Latitude position of drop off point"
+          },
+          "endLong": {
+            "type": "number",
+            "description": "Longitude position of drop off point"
+          },
+          "riderName": {
+            "type": "string",
+            "description": "Name of the Rider"
+          },
+          "driverName": {
+            "type": "string",
+            "description": "Name of the Driver"
+          },
+          "driverVehicle": {
+            "type": "string",
+            "description": "Type of vehicle"
+          }
+      }
+    },
+    "addRideSuccessResponseSchema": {
+      "properties": {
+          "rideId" : {
+            "type": "number",
+            "description": "Unique indentifier of the ride"
+          },
+          "startLat": {
+            "type": "number",
+            "description": "Latitude position of pickup point"
+          },
+          "startLong": {
+            "type": "number",
+            "description": "Longitude position  of pickup point"
+
+          },
+          "endLat": {
+            "type": "number",
+            "description": "Latitude position of drop off point"
+          },
+          "endLong": {
+            "type": "number",
+            "description": "Longitude position of drop off point"
+          },
+          "riderName": {
+            "type": "string",
+            "description": "Name of the Rider"
+          },
+          "driverName": {
+            "type": "string",
+            "description": "Name of the Driver"
+          },
+          "driverVehicle": {
+            "type": "string",
+            "description": "Type of vehicle"
+          },
+          "created" : {
+            "type": "string",
+            "description": "The time when ride occured"
+          }
+      }
+    }
+  }
+}
